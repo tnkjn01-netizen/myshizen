@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>驚きの大自然 | Wonders of Nature</title>
+    <!-- 
+      GITHUB PAGES 動作保証の理由:
+      1. 全てのロジックがクライアントサイドJavaScriptで完結している
+      2. 外部APIキーを使用せず、静的アセットとCDNライブラリのみを利用
+      3. index.html というファイル名により、GitHub Pagesのデフォルトルートとして認識される
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/umd/lucide.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .fade-in { animation: fadeIn 1s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nature-card:hover .card-overlay { opacity: 1; }
+        .card-overlay {
+            transition: opacity 0.3s ease;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 transition-all duration-300 px-6 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="leaf" class="text-emerald-500 w-8 h-8"></i>
+                <span class="text-2xl font-bold tracking-tighter text-white">NATURE.</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-white font-medium">
+                <a href="#explore" class="hover:text-emerald-400 transition">探索</a>
+                <a href="#gallery" class="hover:text-emerald-400 transition">ギャラリー</a>
+                <a href="#about" class="hover:text-emerald-400 transition">自然の知恵</a>
+                <a href="#contact" class="hover:text-emerald-400 transition">保護活動</a>
+            </div>
+            <button class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center text-center text-white hero-gradient">
+        <div class="px-4 fade-in">
+            <h1 class="text-5xl md:text-8xl font-serif mb-6 leading-tight">地球が語る、<br><span class="italic">驚異の物語</span></h1>
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-10 text-stone-200">何百万年もの時間をかけて形作られた、美しくも力強い自然の造形美を探索しましょう。</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#explore" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
+                    冒険を始める
+                </a>
+                <a href="#gallery" class="glass text-white px-8 py-4 rounded-full font-bold transition hover:bg-white/20">
+                    ギャラリーを見る
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </header>
+
+    <section id="explore" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <h2 class="text-emerald-600 font-bold tracking-widest uppercase mb-2">Discovery</h2>
+                    <p class="text-4xl md:text-5xl font-serif">驚異の生態系</p>
+                </div>
+                <p class="max-w-md text-stone-500">地球上のあらゆる場所には、独自のルールで進化を遂げた生命のドラマが息づいています。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Forest Card -->
+                <div class="group relative nature-card h-[500px] rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800" alt="Forest" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 card-overlay opacity-40 group-hover:opacity-90 flex flex-col justify-end p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-2">古の森</h3>
+                        <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">霧に包まれた太古の森。そこには都市の喧騒では決して聞こえない生命の呼吸があります。</p>
+                    </div>
+                </div>
+                <!-- Ocean Card -->
+                <div class="group relative nature-card h-[500px] rounded-3xl overflow-hidden cursor-pointer md:mt-12">
+                    <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&q=80&w=800" alt="Ocean" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 card-overlay opacity-40 group-hover:opacity-90 flex flex-col justify-end p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-2">深海の静寂</h3>
+                        <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">宇宙よりも未知とされる深海。光の届かない世界で、独自の進化を遂げた者たちがいます。</p>
+                    </div>
+                </div>
+                <!-- Mountain Card -->
+                <div class="group relative nature-card h-[500px] rounded-3xl overflow-hidden cursor-pointer md:mt-24">
+                    <img src="https://images.unsplash.com/photo-1464270839659-9718604677cd?auto=format&fit=crop&q=80&w=800" alt="Mountain" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 card-overlay opacity-40 group-hover:opacity-90 flex flex-col justify-end p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-2">高嶺の境界</h3>
+                        <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">雲を突き抜け、星に最も近い場所。過酷な環境が育む崇高な美しさがここにあります。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 px-6 bg-stone-900 text-white">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-serif mb-8">自然のポートレート</h2>
+            <div class="flex flex-wrap justify-center gap-4" id="filter-buttons">
+                <button class="filter-btn active bg-emerald-600 px-6 py-2 rounded-full text-sm font-bold" data-filter="all">すべて</button>
+                <button class="filter-btn bg-stone-800 hover:bg-emerald-600 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="flora">植物</button>
+                <button class="filter-btn bg-stone-800 hover:bg-emerald-600 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="fauna">動物</button>
+                <button class="filter-btn bg-stone-800 hover:bg-emerald-600 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="landscape">風景</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-grid">
+            <!-- Items generated via JS for dynamic filtering example -->
+        </div>
+    </section>
+
+    <footer class="bg-stone-950 text-stone-400 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <div class="flex items-center space-x-2 text-white mb-4">
+                    <i data-lucide="leaf" class="text-emerald-500 w-6 h-6"></i>
+                    <span class="text-xl font-bold tracking-tighter">NATURE.</span>
+                </div>
+                <p class="max-w-xs text-sm">私たちの美しい地球を守るために、今日からできる一歩を。次世代にこの輝きを残しましょう。</p>
+            </div>
+            <div class="flex space-x-6 text-white">
+                <a href="#" class="hover:text-emerald-500 transition"><i data-lucide="instagram"></i></a>
+                <a href="#" class="hover:text-emerald-500 transition"><i data-lucide="twitter"></i></a>
+                <a href="#" class="hover:text-emerald-500 transition"><i data-lucide="facebook"></i></a>
+            </div>
+            <div class="text-sm">
+                &copy; 2024 Wonders of Nature. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- インタラクティブ・スクリプト -->
+    <script>
+        
+        const galleryData = [
+            { tag: 'flora', url: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&q=80&w=400', title: '砂漠の強靭さ' },
+            { tag: 'fauna', url: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&q=80&w=400', title: '百獣の王' },
+            { tag: 'landscape', url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=400', title: '霧の山脈' },
+            { tag: 'fauna', url: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&q=80&w=400', title: '海亀の旅' },
+            { tag: 'flora', url: 'https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&q=80&w=400', title: '日本の竹林' },
+            { tag: 'landscape', url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=400', title: '静寂の湖畔' },
+            { tag: 'fauna', url: 'https://images.unsplash.com/photo-1543946207-39bd91e70ca7?auto=format&fit=crop&q=80&w=400', title: '北極の白' },
+            { tag: 'flora', url: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=400', title: '熱帯の原色' }
+        ];
+
+        const galleryGrid = document.getElementById('gallery-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+
+        function renderGallery(filter = 'all') {
+            galleryGrid.innerHTML = '';
+            const filtered = filter === 'all' ? galleryData : galleryData.filter(item => item.tag === filter);
+            
+            filtered.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'relative aspect-square overflow-hidden rounded-xl group fade-in';
+                div.style.animationDelay = `${index * 100}ms`;
+                div.innerHTML = `
+                    <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                        <span class="text-white text-sm font-bold border-b border-emerald-500 pb-1">${item.title}</span>
+                    </div>
+                `;
+                galleryGrid.appendChild(div);
+            });
+        }
+
+        // ナビゲーションバーのスクロール演出
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-stone-900/90', 'backdrop-blur-md', 'shadow-lg', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-stone-900/90', 'backdrop-blur-md', 'shadow-lg', 'py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('bg-emerald-600'));
+                filterBtns.forEach(b => b.classList.add('bg-stone-800'));
+                btn.classList.remove('bg-stone-800');
+                btn.classList.add('bg-emerald-600');
+                renderGallery(btn.dataset.filter);
+            });
+        });
+
+        // 全てのリソース（Lucideライブラリ含む）が読み込まれた後に実行
+        window.onload = () => {
+            // Lucideアイコンの初期化（ライブラリの存在を確認してから実行）
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.error('Lucide library failed to load.');
+            }
+            
+            // ギャラリーのレンダリング
+            renderGallery();
+        };
+    </script>
+</body>
+</html>
